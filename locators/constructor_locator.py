@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 class ConstructorLocators():
-    ROLLS_SECTION = (By.XPATH, "//div/main/section[1]/div[1]/div[1]")
-    ROLLS_LIST = (By.XPATH, "//div/main/section[1]/div[2]/ul[1]/a")
-    SAUCES_SECTION = (By.XPATH, "//div/main/section[1]/div[1]/div[2]")
-    SAUCES_LIST = (By.XPATH, "//div/main/section[1]/div[2]/ul[2]/a")
-    FILLING_SECTION = (By.XPATH, "//div/main/section[1]/div[1]/div[3]")
-    FILLING_LIST = (By.XPATH, "//div/main/section[1]/div[2]/ul[3]/a")
+    ROLLS_SECTION = (By.XPATH, "//span[text()='Булки']/parent::div")
+    ROLLS_LIST = (By.XPATH, "//a/p[contains(@class, 'BurgerIngredient_ingredient__text__yp3dH') and contains(text(), 'булка')]")
+    SAUCES_SECTION = (By.XPATH, "//span[text()='Соусы']/parent::div")
+    SAUCES_LIST = (By.XPATH, "//a/p[contains(@class, 'BurgerIngredient_ingredient__text__yp3dH') and contains(text(), 'Соус')]")
+    FILLING_SECTION = (By.XPATH, "//span[text()='Начинки']/parent::div")
+    FILLING_LIST = (By.XPATH, "//h2[text()='Начинки']/following-sibling::ul/a")
     CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[contains(text(), 'Конструктор')]")

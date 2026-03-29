@@ -1,29 +1,10 @@
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from locators.profile_locator import ProfileLocators
-from locators.login_locator import LoginLocators
-from curl import LOGIN_URL
+from pages.profile_page import ProfilePage
 
-def test_logout_button_click_shows_login_form(authorized_user):
-    driver = authorized_user
-    wait = WebDriverWait(driver, 10)
+class TestLogoutFunction:
 
-    from locators.base_locator import BaseLocators
-    wait = WebDriverWait(driver, 10)
-    login_button = wait.until(
-        EC.element_to_be_clickable(BaseLocators.PERSONAL_ACCOUNT_BUTTON)
-    )
-    login_button.click()
+    def test_logout_button_click_shows_login_form(self, authorized_user):
+        page = ProfilePage(authorized_user)
+        page.find_and_click_logout_button()
+        login_button = page.login_button_wait()
 
-    logout_button = wait.until(
-        EC.element_to_be_clickable((ProfileLocators.LOGOUT_BUTTON))
-    )
-    logout_button.click()
-
-    wait.until(lambda driver: driver.current_url == LOGIN_URL)
-
-    login_button = wait.until(
-        EC.visibility_of_element_located((LoginLocators.LOGIN_BUTTON))
-    )
-    
-    assert login_button.is_displayed()
+        assert login_button.is_displayed()
