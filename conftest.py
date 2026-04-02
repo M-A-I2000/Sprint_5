@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from curl import LOGIN_URL
-from locators.login_locator import LoginLocators
+from pages.login_page import LoginPage
 from valid_data import *
 from helpers import *
 
@@ -23,25 +23,10 @@ def driver():
 @pytest.fixture(scope="function")
 def authorized_user(driver):
     driver.delete_all_cookies()
-    
     driver.get(LOGIN_URL)
 
-    wait = WebDriverWait(driver, 10)
-
-    email_field = wait.until(
-        EC.presence_of_element_located((LoginLocators.EMAIL_INPUT))
-    )
-    email_field.send_keys(registration_email)
-    password_field = wait.until(
-        EC.presence_of_element_located((LoginLocators.PASSWORD_INPUT))
-    )
-    password_field.send_keys(registration_password)
-    login_button = wait.until(
-        EC.element_to_be_clickable(LoginLocators.LOGIN_BUTTON)
-        )
-    login_button.click()
-    
-    wait.until(lambda driver: driver.current_url != LOGIN_URL)
+    page = LoginPage(driver)
+    page.login_with_valid_data()
 
     return driver
 

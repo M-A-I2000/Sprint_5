@@ -69,3 +69,6 @@ class ProfilePage(BasePage):
             EC.visibility_of_element_located((ProfileLocators.LOGOUT_BUTTON))
         )
         return logout_button
+    
+    def is_order_button_visible(self):
+        return self.is_element_visible(BaseLocators.ORDER_BUTTON)

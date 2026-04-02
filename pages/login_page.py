@@ -5,6 +5,7 @@ from locators.base_locator import BaseLocators
 from locators.registration_locator import RegistrationLocators
 from locators.forgot_password_locator import RestoreLocators
 from curl import *
+from valid_data import *
 
 class LoginPage(BasePage):
 
@@ -58,3 +59,27 @@ class LoginPage(BasePage):
         self.wait.until(
             EC.visibility_of_element_located(LoginLocators.EMAIL_INPUT)
         )
+
+    def is_order_button_visible(self):
+        return self.is_element_visible(BaseLocators.ORDER_BUTTON)
+    
+    def is_on_login_page(self):
+        return self.is_current_url_equal_to(LOGIN_URL)
+    
+    def login_with_valid_data(self):
+        email_field = self.wait.until(
+            EC.presence_of_element_located((LoginLocators.EMAIL_INPUT))
+        )
+        email_field.send_keys(registration_email)
+
+        password_field = self.wait.until(
+            EC.presence_of_element_located((LoginLocators.PASSWORD_INPUT))
+        )
+        password_field.send_keys(registration_password)
+
+        login_button = self.wait.until(
+            EC.element_to_be_clickable(LoginLocators.LOGIN_BUTTON)
+            )
+        login_button.click()
+        
+        self.wait.until(lambda driver: driver.current_url != LOGIN_URL)

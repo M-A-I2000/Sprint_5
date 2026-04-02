@@ -1,6 +1,4 @@
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pages.registration_page import RegistrationPage
 from curl import *
 
@@ -12,7 +10,7 @@ class TestRegistrationPage:
         page.login(valid_name, valid_email, valid_password)
         page.successful_registration()
 
-        assert BASE_URL in driver.current_url
+        assert page.is_base_url_contains()
 
 
     @pytest.mark.parametrize(
@@ -28,5 +26,5 @@ class TestRegistrationPage:
         page.open_registration_page()
         page.login(wrong_name, wrong_email, wrong_password)
 
-        assert driver.current_url == REGISTER_URL
+        assert page.is_on_registration_page()
         

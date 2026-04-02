@@ -1,7 +1,4 @@
-from selenium.webdriver.support import expected_conditions as EC
-from locators.profile_locator import ProfileLocators
 from pages.profile_page import ProfilePage
-from locators.base_locator import BaseLocators
 from curl import *
 
 class TestProfilePage:
@@ -20,7 +17,7 @@ class TestProfilePage:
         page.home_page_wait()
         page.click_to_constructor_button()
 
-        assert EC.visibility_of_element_located(BaseLocators.ORDER_BUTTON)
+        assert page.is_order_button_visible()
 
 
     def test_logo_click_navigates_to_homepage(self, authorized_user): #переход на главную страницу по клику на лого
@@ -29,4 +26,4 @@ class TestProfilePage:
         page.home_page_wait()
         page.click_to_logo_button()
 
-        assert EC.visibility_of_element_located(BaseLocators.ORDER_BUTTON)
+        assert page.is_order_button_visible()

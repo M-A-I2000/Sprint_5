@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from curl import *
 
 class BasePage:
 
@@ -28,3 +29,19 @@ class BasePage:
 
     def get_text(self, locator):
         return self.find(locator).text
+    
+    def is_base_url_contains(self):
+        return BASE_URL in self.driver.current_url
+    
+    def is_element_visible(self, locator):
+        try:
+            self.wait.until(EC.visibility_of_element_located(locator))
+            return True
+        except:
+            return False
+        
+    def get_current_url(self):
+        return self.driver.current_url
+    
+    def is_current_url_equal_to(self, expected_url):
+        return self.get_current_url() == expected_url

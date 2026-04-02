@@ -1,5 +1,4 @@
 from pages.constructor_page import ConstructorPage
-from locators.constructor_locator import ConstructorLocators
 from curl import *
 
 class TestConstructorPage:

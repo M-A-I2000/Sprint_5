@@ -1,5 +1,4 @@
 from pages.base_page import BasePage
-from locators.base_locator import BaseLocators
 from locators.registration_locator import RegistrationLocators
 from curl import REGISTER_URL, BASE_URL
 
@@ -17,3 +16,6 @@ class RegistrationPage(BasePage):
 
     def successful_registration(self):
         self.wait.until(lambda driver: driver.current_url != BASE_URL + '/register')
+
+    def is_on_registration_page(self):
+        return self.is_current_url_equal_to(REGISTER_URL)
